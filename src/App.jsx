@@ -12,6 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [totalPages, setTotalpages] = useState(0);
   const [totalPagesRated, setTotalpagesRated] = useState(0);
+  const [search, setSearch] = useState('');
   const [guestSessionId, setGuestSessionId] = useState(null);
   const [ratedMovies, setRatedMovies] = useState([]);
 
@@ -72,20 +73,22 @@ function App() {
   }, []);
 
   const handleSearch = debounce(async (searchValue) => {
-    setIsLoading(true);
-    const moviesData = await fetchMovies(searchValue, 1);
-    if (moviesData.results.length === 0) {
-      setIsSuccessful(false);
-    } else {
-      setIsSuccessful(true);
-      setMovies(moviesData.results);
-      setSearch(searchValue);
+    if (!/^\s*$/.test(searchValue)) {
+      setIsLoading(true);
+      const moviesData = await fetchMovies(searchValue, 1);
+      if (moviesData.results.length === 0) {
+        setIsSuccessful(false);
+      } else {
+        setIsSuccessful(true);
+        setMovies(moviesData.results);
+        setSearch(searchValue);
+      }
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, 500);
 
   const handlePageChange = async (newPage) => {
-    setIsLoading(true); // Установить состояние загрузки на true перед выполнением запроса
+    setIsLoading(true);
     const moviesData = await fetchMovies(search, newPage);
     setMovies(moviesData.results);
     setPage(newPage);

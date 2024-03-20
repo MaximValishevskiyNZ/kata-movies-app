@@ -23,7 +23,7 @@ const MoviesList = ({
 }) => {
   const [tab, setTab] = useState(true);
   const { genres } = useContext(GenresContext);
-  const switchTabs = (e) => {
+  const switchTabs = () => {
     setTab(!tab);
     if (tab) {
       fetchRated(1);
@@ -72,11 +72,7 @@ const MoviesList = ({
             type="warning"
           />
         )
-      ) : isLoading ? (
-        <div className="loading-container">
-          <LoadingOutlined />
-        </div>
-      ) : (
+      ) : ratedMovies ? (
         <>
           <div className="movies-list">
             {ratedMovies.map((movie) => (
@@ -99,6 +95,8 @@ const MoviesList = ({
             ''
           )}
         </>
+      ) : (
+        <Alert description="No rated movies yet." type="warning" />
       )}
     </>
   );
