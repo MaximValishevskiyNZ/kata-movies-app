@@ -1,0 +1,35 @@
+.search-input {
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  width: 100%;
+  padding: 13px 12px;
+}
+
+.header-nav {
+  width: fit-content;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  line-height: 157%;
+  gap: 16px;
+  border-bottom: 1px solid rgba(181, 184, 177, 1);
+  margin: auto auto 20px;
+}
+
+.nav-tab {
+  text-align: center;
+  position: relative;
+  width: 65px;
+  height: 52px;
+  cursor: pointer;
+  bottom: -1px;
+}
+
+.nav-tab:hover {
+}
+
+.nav-tab.active {
+  border-bottom: 2px solid #1890ff;
+}
