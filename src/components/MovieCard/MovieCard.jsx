@@ -2,7 +2,7 @@ import React from 'react';
 import './MovieCard.css';
 import { format } from 'date-fns';
 import { Rate } from 'antd';
-const MovieCard = ({ movie, token, genres, key }) => {
+const MovieCard = ({ movie, token, genres }) => {
   const rateMovie = async (rating) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie.id}/rating?guest_session_id=${sessionStorage.getItem('guestKey')}`,
@@ -84,7 +84,7 @@ const MovieCard = ({ movie, token, genres, key }) => {
   };
 
   return (
-    <article className="movie-card" key={key}>
+    <article className="movie-card">
       <div className="movie-card-content">
         <div className="movie-card-layout">
           <div className="movie-poster-container">
@@ -134,7 +134,7 @@ const MovieCard = ({ movie, token, genres, key }) => {
                     className={`movie-genres ${movie.genre_ids.length > 3 ? 'small' : ''}`}
                   >
                     {movie.genre_ids.map((id) => (
-                      <div className="movie-genre">
+                      <div className="movie-genre" key={id}>
                         {genres.find((genre) => genre.id === id).name}
                       </div>
                     ))}
